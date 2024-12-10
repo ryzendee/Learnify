@@ -27,6 +27,7 @@ jobs:
 
   build:
     needs: test
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/reusable-build.yml
     with:
       project_dir: card-service
