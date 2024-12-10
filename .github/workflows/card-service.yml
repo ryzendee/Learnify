@@ -1,0 +1,36 @@
+name: Card Service Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'card-service/**'
+      - '.github/workflows/card-service.yml'
+      - '.github/workflows/reusable-*.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'card-service/**'
+      - '.github/workflows/card-service.yml'
+      - '.github/workflows/reusable-*.yml'
+
+jobs:
+  test:
+    uses: ./.github/workflows/reusable-test.yml
+    with:
+      project_dir: card-service
+      java_version: '17'
+      java_distribution: 'corretto'
+      cache_build_tool: 'maven'
+
+  build:
+    needs: test
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      project_dir: card-service
+      image_name: 'ryzendee/card-service'
+      image_tag: 'latest'
+    secrets: inherit
+
