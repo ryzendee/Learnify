@@ -1,0 +1,42 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <!--CREATE TABLE-->
+    <changeSet id="v1-1" author="Ryazantsev Dmitry">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cards"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="cards">
+            <!-- UUID as primary key -->
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <!-- Term field -->
+            <column name="term" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- Definition field -->
+            <column name="definition" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- CreatedAt timestamp -->
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- UpdatedAt timestamp -->
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
