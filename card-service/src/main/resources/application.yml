@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8088
 spring:
   application:
     name: card-service
@@ -10,3 +10,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9080/realms/learnify-dev
+
+springdoc:
+  api-docs:
+    enabled: false
+

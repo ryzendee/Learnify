@@ -1,0 +1,12 @@
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: learnify-swagger-ui
+      use-pkce-with-authorization-code-grant: true
+  api-docs:
+    enabled: true
+
+keycloak:
+  url:
+    token: http://localhost:9080/realms/learnify-dev/protocol/openid-connect/token
+    authorization: http://localhost:9080/realms/learnify-dev/protocol/openid-connect/auth"

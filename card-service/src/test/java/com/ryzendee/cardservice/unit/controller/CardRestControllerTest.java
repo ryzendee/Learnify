@@ -3,7 +3,6 @@ package com.ryzendee.cardservice.unit.controller;
 import com.ryzendee.cardservice.controller.CardRestController;
 import com.ryzendee.cardservice.dto.request.CardCreateRequest;
 import com.ryzendee.cardservice.dto.request.CardUpdateRequest;
-import com.ryzendee.cardservice.dto.response.CardResponse;
 import com.ryzendee.cardservice.exception.CardNotFoundException;
 import com.ryzendee.cardservice.service.CardService;
 import com.ryzendee.cardservice.testutils.builder.card.CardCreateRequestTestBuilder;
@@ -18,15 +17,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -37,6 +35,8 @@ import static org.junit.jupiter.api.Named.named;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oauth2Login;
 
 @WebMvcTest(CardRestController.class)
 public class CardRestControllerTest {
@@ -61,8 +61,11 @@ public class CardRestControllerTest {
         RestAssuredMockMvc.basePath = BASE_URI;
         RestAssuredMockMvc.mockMvc(mockMvc);
         RestAssuredMockMvc.enableLoggingOfRequestAndResponseIfValidationFails();
+
         restAssuredRequest = RestAssuredMockMvc.given()
-                .contentType(ContentType.JSON);
+                .contentType(ContentType.JSON)
+                .auth()
+                .with(jwt());
 
         id = UUID.randomUUID();
     }

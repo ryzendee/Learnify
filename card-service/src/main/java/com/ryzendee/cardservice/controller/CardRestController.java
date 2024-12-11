@@ -7,6 +7,7 @@ import com.ryzendee.cardservice.service.CardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+@SecurityRequirement(name = "keycloak")
 @RestController
 @RequestMapping("/api/v1/cards")
 @RequiredArgsConstructor
