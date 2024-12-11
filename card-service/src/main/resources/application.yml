@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8088
 spring:
   application:
     name: card-service
@@ -10,3 +10,22 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9080/realms/learnify-dev
+
+
+springdoc:
+  swagger-ui:
+    oauth:
+      client-id: learnify-swagger-ui
+      use-pkce-with-authorization-code-grant: true
+  api-docs:
+    enabled: true
+
+keycloak:
+  uri: localhost:9080
+  realm:
+    name: learnify-dev
