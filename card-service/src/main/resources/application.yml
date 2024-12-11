@@ -16,16 +16,7 @@ spring:
         jwt:
           issuer-uri: http://localhost:9080/realms/learnify-dev
 
-
 springdoc:
-  swagger-ui:
-    oauth:
-      client-id: learnify-swagger-ui
-      use-pkce-with-authorization-code-grant: true
   api-docs:
-    enabled: true
+    enabled: false
 
-keycloak:
-  uri: localhost:9080
-  realm:
-    name: learnify-dev
